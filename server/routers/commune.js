@@ -25,7 +25,7 @@ router.get('/:id*?', (req, res)=>{
 });
 
 router.patch('/:id', (req, res)=>{
-  Commune.updateCommune(req.params, req.body, (error, result)=> {
+  Commune.updateCommune(req.params.id, req.body, (error, result)=> {
     res
     .status(200)
     .json({error, result})
@@ -33,7 +33,7 @@ router.patch('/:id', (req, res)=>{
 })
 
 router.delete('/:id', (req, res)=>{
-  Commune.deleteCommune(req.params, (error, result)=> {
+  Commune.deleteCommune(req.params.id, (error, result)=> {
     res
     .status(200)
     .json({error, result})

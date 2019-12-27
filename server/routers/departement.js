@@ -8,7 +8,7 @@ router.use(function timeLog (req, res, next) {
 });
 
 router.post('/', (req, res)=>{
-  
+
   Department.createDepartment(req.body, (error, result)=> {
     res
     .status(200)
@@ -25,7 +25,7 @@ router.get('/:id*?', (req, res)=>{
 });
 
 router.patch('/:id', (req, res)=>{
-  Department.updateDepartment(req.params, req.body, (error, result)=> {
+  Department.updateDepartment(req.params.id, req.body, (error, result)=> {
     res
     .status(200)
     .json({error, result})
@@ -33,7 +33,7 @@ router.patch('/:id', (req, res)=>{
 })
 
 router.delete('/:id', (req, res)=>{
-  Department.deleteDepartment(req.params, (error, result)=> {
+  Department.deleteDepartment(req.params.id, (error, result)=> {
     res
     .status(200)
     .json({error, result})

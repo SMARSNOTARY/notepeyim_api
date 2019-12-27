@@ -21,9 +21,9 @@ const getDepartment = ({id}, callback) => {
 }
 
 const updateDepartment = (id, values, callback) => {
-
+  
   Departement
-    .update({ values }, {where: { id }})
+    .update( values, {where: { id }})
     .then( department => { callback(null, department); })
     .catch( error => callback(error, null));
 }

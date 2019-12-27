@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const commune = sequelize.define('commune', {
     desc_commune: DataTypes.STRING,
-    deptID: DataTypes.INTEGER,
+    departementId: DataTypes.INTEGER,
     code: DataTypes.STRING,
     image: DataTypes.STRING
   }, {});

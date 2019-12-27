@@ -1,6 +1,6 @@
 sequelize model:create --attributes "desc_department:string code:string" --name departement
 
-sequelize model:create --attributes "desc_commune:string deptID:integer code:string image:string" --name commune
+sequelize model:create --attributes "desc_commune:string departementId:integer code:string image:string" --name commune
 
 sequelize model:create --attributes "desc_type:string" --name type
 
