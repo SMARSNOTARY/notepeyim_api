@@ -1,0 +1,15 @@
+sequelize model:create --attributes "desc_department:string code:string" --name departement
+
+sequelize model:create --attributes "desc_commune:string deptID:integer code:string image:string" --name commune
+
+sequelize model:create --attributes "desc_type:string" --name type
+
+sequelize model:create --attributes "password:string typeID:integer telephone:string email:string photo:string" --name user
+
+sequelize model:create --attributes "nom:string prenom:string naissance:date nif:string addresse:string longitude:float latitude:float comission:date communeID:integer userID:integer isValidate:boolean" --name information
+
+sequelize model:create --attributes "value:double notaireID:integer clientID:integer comment:string" --name rating
+
+sequelize model:create --attributes "sujet:string content:string datemeet:date status:string clientID:integer notaireID:integer" --name meeting
+
+sequelize db:migrate
