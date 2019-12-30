@@ -15,9 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     })
 
-    models.user.hasMany(models.rating);
-    models.user.hasMany(models.information);
-    models.user.hasMany(models.meeting);
+    models.user.hasOne(models.information);
+
+    models.user.hasMany(models.rating, {as: 'clientRate'});
+    models.user.hasMany(models.rating, {as: 'notaireRate'});
+
+    models.user.hasMany(models.meeting, {as: 'client'});
+    models.user.hasMany(models.meeting, {as: 'notaire'});
   };
   return user;
 };

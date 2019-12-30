@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING,
         default: 'ATTENTE'
       },
-      clientID: {
+      userID: {
         type: Sequelize.INTEGER,
         references: {model: 'Users', key: 'id'}
       },

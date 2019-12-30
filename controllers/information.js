@@ -1,49 +1,49 @@
 const models = require('../models');
-const Commune = models.commune;
-const Departement = models.departement;
+const Information = models.information;
+const User = models.user;
 
-const createCommune = (values, callback) => {
-  Commune
+const createInformation = (values, callback) => {
+  Information
     .create(values)
     .then(result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const getCommune = ({id}, callback) => {
+const getInformation = ({id}, callback) => {
   var opt = {};
   if( id ){ opt.id = id; }
 
-  Commune
+  Information
     .findAll({
       where: opt,
-      include: [{ model: Departement, required: true}],
+      include: [{ model: User, required: false}],
       limit: 100
     })
     .then(results => { callback(null, results); })
     .catch(error => callback(error, null));
 }
 
-const updateCommune = (id, values, callback) => {
+const updateInformation = (id, values, callback) => {
 
-  Commune
+  Information
     .update({ values }, {where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const deleteCommune = (id, callback) => {
+const deleteInformation = (id, callback) => {
 
-  Commune
+  Information
     .destroy({where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
 module.exports = {
-  createCommune,
-  getCommune,
-  updateCommune,
-  deleteCommune
+  createInformation,
+  getInformation,
+  updateInformation,
+  deleteInformation
 }
 
 
