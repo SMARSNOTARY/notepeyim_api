@@ -8,8 +8,8 @@ sequelize model:create --attributes "password:string typeID:integer telephone:st
 
 sequelize model:create --attributes "nom:string prenom:string naissance:date nif:string addresse:string longitude:float latitude:float comission:date communeID:integer userID:integer isValidate:boolean" --name information
 
-sequelize model:create --attributes "value:double notaireID:integer clientID:integer comment:string" --name rating
+sequelize model:create --attributes "value:double notaireID:integer userID:integer comment:string" --name rating
 
-sequelize model:create --attributes "sujet:string content:string datemeet:date status:string clientID:integer notaireID:integer" --name meeting
+sequelize model:create --attributes "sujet:string content:string datemeet:date status:string userID:integer notaireID:integer" --name meeting
 
 sequelize db:migrate

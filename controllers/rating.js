@@ -1,49 +1,52 @@
 const models = require('../models');
-const Commune = models.commune;
-const Departement = models.departement;
+const Rating = models.rating;
+const User = models.user;
 
-const createCommune = (values, callback) => {
-  Commune
+const createRating = (values, callback) => {
+  Rating
     .create(values)
     .then(result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const getCommune = ({id}, callback) => {
+const getRating = ({id}, callback) => {
   var opt = {};
   if( id ){ opt.id = id; }
 
-  Commune
+  Rating
     .findAll({
       where: opt,
-      include: [{ model: Departement, required: true}],
+      include: [
+        { model: User, required: true, as: 'client'},
+        { model: User, required: true, as: 'notaire'}
+      ],
       limit: 100
     })
     .then(results => { callback(null, results); })
     .catch(error => callback(error, null));
 }
 
-const updateCommune = (id, values, callback) => {
+const updateRating = (id, values, callback) => {
 
-  Commune
+  Rating
     .update({ values }, {where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const deleteCommune = (id, callback) => {
+const deleteRating = (id, callback) => {
 
-  Commune
+  Rating
     .destroy({where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
 module.exports = {
-  createCommune,
-  getCommune,
-  updateCommune,
-  deleteCommune
+  createRating,
+  getRating,
+  updateRating,
+  deleteRating
 }
 
 

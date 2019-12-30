@@ -5,16 +5,27 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING,
     datemeet: DataTypes.DATE,
     status: DataTypes.STRING,
-    clientID: DataTypes.INTEGER,
+    userID: DataTypes.INTEGER, 
     notaireID: DataTypes.INTEGER
   }, {});
   meeting.associate = function(models) {
     // associations can be defined here
     models.meeting.belongsTo(models.user, {
       foreignKey: {
+        field: 'userId',
         allowNull: false
-      }
+      },
+      as: 'client'
     });
+
+    models.meeting.belongsTo(models.user, {
+      foreignKey: {
+        field: 'notaireId',
+        allowNull: false
+      },
+      as: 'notaire'
+    });
+
   };
   return meeting;
 };

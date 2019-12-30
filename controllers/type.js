@@ -1,44 +1,47 @@
 const models = require('../models');
-const Departement = models.departement;
+const Type = models.type;
 
-const createDepartment = (values, callback) => {
-  Departement
+const createType = (values, callback) => {
+  Type
     .create(values)
-    .then( result => { callback(null, result ); })
+    .then(result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const getDepartment = ({id}, callback) => {
+const getType = ({id}, callback) => {
   var opt = {};
   if( id ){ opt.id = id; }
 
-  Departement
-    .findAll({where: opt})
+  Type
+    .findAll({
+      where: opt,
+      limit: 100
+    })
     .then(results => { callback(null, results); })
     .catch(error => callback(error, null));
 }
 
-const updateDepartment = (id, values, callback) => {
+const updateType = (id, values, callback) => {
 
-  Departement
-    .update( values, {where: { id }})
+  Type
+    .update({ values }, {where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const deleteDepartment = (id, callback) => {
+const deleteType = (id, callback) => {
 
-  Departement
+  Type
     .destroy({where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
 module.exports = {
-  createDepartment,
-  getDepartment,
-  updateDepartment,
-  deleteDepartment
+  createType,
+  getType,
+  updateType,
+  deleteType
 }
 
 

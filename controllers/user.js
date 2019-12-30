@@ -1,49 +1,50 @@
 const models = require('../models');
-const Commune = models.commune;
-const Departement = models.departement;
+const User = models.user;
+const Type = models.type;
+const Information = models.information;
 
-const createCommune = (values, callback) => {
-  Commune
+const createUser = (values, callback) => {
+  User
     .create(values)
     .then(result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const getCommune = ({id}, callback) => {
+const getUser = ({id}, callback) => {
   var opt = {};
   if( id ){ opt.id = id; }
 
-  Commune
+  User
     .findAll({
       where: opt,
-      include: [{ model: Departement, required: true}],
+      include: [
+        { model: Information, required: false},
+        { model: Type, required: true}],
       limit: 100
     })
     .then(results => { callback(null, results); })
     .catch(error => callback(error, null));
 }
 
-const updateCommune = (id, values, callback) => {
+const updateUser = (id, values, callback) => {
 
-  Commune
+  User
     .update({ values }, {where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
-const deleteCommune = (id, callback) => {
+const deleteUser = (id, callback) => {
 
-  Commune
+  User
     .destroy({where: { id }})
     .then( result => { callback(null, result); })
     .catch( error => callback(error, null));
 }
 
 module.exports = {
-  createCommune,
-  getCommune,
-  updateCommune,
-  deleteCommune
+  createUser,
+  getUser,
+  updateUser,
+  deleteUser
 }
-
-
