@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const {auth, authverify} = require('./../../config/auth');
 const Department = require('./../../controllers/departement');
 
 router.use(function timeLog (req, res, next) {
-  console.log('Time: ', Date.now())
+  console.log('Time departement: ', Date.now())
   next();
 });
 
-router.post('/', (req, res)=>{
+router.post('/', auth, authverify, (req, res)=>{
 
   Department.createDepartment(req.body, (error, result)=> {
     res
@@ -24,7 +25,7 @@ router.get('/:id*?', (req, res)=>{
   });
 });
 
-router.patch('/:id', (req, res)=>{
+router.patch('/:id', auth, authverify, (req, res)=>{
   Department.updateDepartment(req.params.id, req.body, (error, result)=> {
     res
     .status(200)
@@ -32,7 +33,7 @@ router.patch('/:id', (req, res)=>{
   });
 })
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', auth, authverify, (req, res)=>{
   Department.deleteDepartment(req.params.id, (error, result)=> {
     res
     .status(200)

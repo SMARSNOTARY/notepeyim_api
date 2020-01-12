@@ -5,6 +5,7 @@ const Information = models.information;
 const ResetPass = models.resetpass;
 
 const createUser = (values, callback) => {
+
   User
     .create(values)
     .then(result => { callback(null, result); })
@@ -93,7 +94,7 @@ const resetPass = (id, password, callback) => {
           { where: { id: results.userID }, individualHooks: true}
         )
         .then( response => {
-          console.log('response')
+
           ResetPass
             .update({used: 'YES'}, {where: {id: results.id}})
             .then( result => { callback(null, {response, result})})
@@ -114,6 +115,7 @@ const resetPass = (id, password, callback) => {
     })
     .catch(error => callback(error, null));
 }
+
 
 const updateUser = (id, values, callback) => {
   delete values.password;
