@@ -4,9 +4,10 @@ const app = express();
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const {auth, authsign, authverify} = require('./../config/auth');
-
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -27,19 +28,21 @@ const meetingRoute = require('./routers/meeting');
 const ratingRoute = require('./routers/rating');
 const registerRoute = require('./routers/register');
 const loginRoute = require('./routers/login');
+const fileRoute = require('./routers/file');
 
-app.use('/api/department', auth, authverify, departmentRoute);
+app.use('/api/department', departmentRoute);
 app.use('/api/commune', communeRoute);
 app.use('/api/type', typeRoute);
-app.use('/api/user', auth, userRoute);
-app.use('/api/information', auth, informationRoute);
-app.use('/api/meeting', auth, meetingRoute);
-app.use('/api/rating', ratingRoute);
+app.use('/api/user', auth, authverify, userRoute);
+app.use('/api/information', auth, authverify, informationRoute);
+app.use('/api/meeting', auth, authverify, meetingRoute);
+app.use('/api/rating', auth, authverify, ratingRoute);
 
-app.use('/api/register', registerRoute);
+app.use('/api/register', authsign, registerRoute);
 app.use('/api/login', authsign, loginRoute);
 
+app.use('/media', fileRoute);
 
-app.listen(PORT, HOST, ()=>{
+app.listen(parseInt(PORT), HOST, ()=>{
   console.log(`App listen on ${HOST}:${PORT}`)
 });

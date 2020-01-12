@@ -1,2 +1,9 @@
 node_modules
 .env
+
+files/profil/*
+!files/profil/default.png
+!files/profil/default-profil.png
+
+files/doc/*
+!files/doc/default.png

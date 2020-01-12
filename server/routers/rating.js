@@ -15,8 +15,17 @@ router.post('/', (req, res)=>{
   });
 });
 
+router.get('/count/:id', (req, res)=>{
+  Rating.countRating(req.params, (error, result)=> {
+    res
+    .status(200)
+    .json({error, result})
+  });
+});
+
 router.get('/:id*?', (req, res)=>{
-  Rating.getRating(req.params, (error, result)=> {
+
+  Rating.getRating(req.params, req.query, (error, result)=> {
     res
     .status(200)
     .json({error, result})

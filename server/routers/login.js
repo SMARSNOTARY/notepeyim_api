@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('./../../controllers/user');
 
 router.use(function timeLog (req, res, next) {
-  console.log('Time: ', Date.now())
+  console.log('Time login: ', Date.now())
   next();
 });
 
@@ -12,7 +12,7 @@ router.post('/', (req, res)=>{
   User.getLogin(req.body, (error, result)=> {
 
     let token = result != null ? req.token : null;
-    
+
     res
     .status(200)
     .json({error, token, result})
