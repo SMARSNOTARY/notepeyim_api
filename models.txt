@@ -12,4 +12,6 @@ sequelize model:create --attributes "value:double notaireID:integer userID:integ
 
 sequelize model:create --attributes "sujet:string content:string datemeet:date status:string userID:integer notaireID:integer" --name meeting
 
+sequelize model:create --attributes "userID:integer used:string" --name resetpass
+
 sequelize db:migrate
