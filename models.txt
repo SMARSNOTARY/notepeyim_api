@@ -4,7 +4,7 @@ sequelize model:create --attributes "desc_commune:string departementId:integer c
 
 sequelize model:create --attributes "desc_type:string" --name type
 
-sequelize model:create --attributes "password:string typeID:integer telephone:string email:string photo:string" --name user
+sequelize model:create --attributes "password:string typeID:integer telephone:string email:string photo:string validate:boolean" --name user
 
 sequelize model:create --attributes "nom:string prenom:string naissance:date nif:string addresse:string longitude:float latitude:float comission:date communeID:integer userID:integer isValidate:boolean" --name information
 

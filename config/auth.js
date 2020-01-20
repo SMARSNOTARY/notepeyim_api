@@ -16,18 +16,28 @@ const auth = (req, res, next) => {
 
 const authsign = (req, res, next) => {
 
-  const token = jwt.sign({
-    data: 'Why u need to decode this token'
+  const error = req.api.error;
+  const result = req.api.result;
+  const id = result != null ? result.id : null;
+
+  let token = jwt.sign({
+    data: 'Why u need to decode this token',
+    user: { id }
   }, process.env.SECRET_AUTH, { expiresIn: '150 days' });
   req.token = token;
-  next();
+
+  token = result != null ? token : null;
+
+  res
+    .status(200)
+    .json({error, token, result})
 }
 
 const authverify = (req, res, next) => {
 
   jwt.verify(req.token, process.env.SECRET_AUTH, (err, decoded)=> {
     if(err){
-      res.status(403).json({message: 'login to get your token'});
+      res.status(403).json({message: 'Invalid token, login to get your token'});
     }else{
       req.decoded = decoded;
       next();

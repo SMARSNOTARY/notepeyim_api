@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     photo: {
       type: DataTypes.STRING,
       defaultValue: '/img/profil/default.png'
+    },
+    validate: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 1
     }
   }, {
     indexes: [{unique: true, fields: ['email']}],
@@ -50,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
   user.prototype.validPassword = async function (password) {
     return await bcrypt.compare(password, this.hashpassword);
   }
-
+  
   user.associate = function(models) {
     // associations can be defined here
     models.user.belongsTo(models.type, {
