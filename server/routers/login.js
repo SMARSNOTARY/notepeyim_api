@@ -1,23 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./../../controllers/user');
+const { authsign } = require('./../../config/auth');
 
 router.use(function timeLog (req, res, next) {
   console.log('Time login: ', Date.now())
   next();
 });
 
-router.post('/', (req, res)=>{
+router.post('/', (req, res, next)=>{
 
   User.getLogin(req.body, (error, result)=> {
-
-    let token = result != null ? req.token : null;
-
-    res
-    .status(200)
-    .json({error, token, result})
+    req['api'] = {};
+    req['api']['error'] = error;
+    req['api']['result'] = result;
+    next();
   });
-});
+}, authsign);
 
 router.post('/request/', (req, res)=>{
 
@@ -38,3 +37,9 @@ router.post('/reset/:id', (req, res)=>{
 });
 
 module.exports = router;
+
+/*
+Publishable key -> pk_test_pISb2Oa5ruD40gLYMXwy5CU7
+
+Secret key -> sk_test_DufAALPfasIZBCq3Za4u8mUB
+*/

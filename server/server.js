@@ -29,6 +29,7 @@ const ratingRoute = require('./routers/rating');
 const registerRoute = require('./routers/register');
 const loginRoute = require('./routers/login');
 const fileRoute = require('./routers/file');
+const paymentRoute = require('./routers/payment');
 
 app.use('/api/department', departmentRoute);
 app.use('/api/commune', communeRoute);
@@ -38,8 +39,9 @@ app.use('/api/information', auth, authverify, informationRoute);
 app.use('/api/meeting', auth, authverify, meetingRoute);
 app.use('/api/rating', auth, authverify, ratingRoute);
 
-app.use('/api/register', authsign, registerRoute);
-app.use('/api/login', authsign, loginRoute);
+app.use('/api/register', registerRoute);
+app.use('/api/login', loginRoute);
+app.use('/api/payment', paymentRoute);
 
 app.use('/media', fileRoute);
 

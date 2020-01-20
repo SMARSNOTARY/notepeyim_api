@@ -29,22 +29,23 @@ router.get('/:id*?', (req, res)=>{
 
 const upload = profilUpload.single('photo');
 
-router.patch('/:id', (req, res)=>{
-  
+router.patch('/', (req, res)=>{
+  const decod = req['decoded'];
+
   upload(req, res, (error) => {
     if(error){
       error.message = error.code == 'LIMIT_FILE_SIZE'? 'File Size is too large. Allowed fil size is 1Mb': error.message;
 
       res
         .status(200)
-        .json({error, token: null, result: null})
+        .json({error, result: null})
     }else{
 
       if(req.file){
         req.body.photo = `/media/${req.file.filename}/?type=profil`;
       }
 
-      User.updateUser(req.params.id, req.body, (error, result)=> {
+      User.updateUser(decod.user.id, req.body, (error, result)=> {
         res
         .status(200)
         .json({error, result})
@@ -54,8 +55,10 @@ router.patch('/:id', (req, res)=>{
   })
 });
 
-router.delete('/:id', (req, res)=>{
-  User.deleteUser(req.params.id, (error, result)=> {
+router.delete('/', (req, res)=>{
+  const decod = req['decoded'];
+
+  User.deleteUser(decod.user.id, (error, result)=> {
     res
     .status(200)
     .json({error, result})

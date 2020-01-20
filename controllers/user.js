@@ -39,7 +39,6 @@ const getLogin = (values, callback) => {
       limit: 1
     })
     .then(async (results) => {
-
       if(await results.validPassword(values.password)){
         callback(null, results);
       }else{
